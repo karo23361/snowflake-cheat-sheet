@@ -26,7 +26,10 @@ AUTO_RESUME = TRUE
 INITIALLY_SUSPENDED = FALSE
 COMMENT = 'This is the comment for the warehouse';
 ```
-
+Schema creation:
+```sql
+CREATE OR REPLAC SCHEMA <schema_name>;
+```
 | Available size |
 | -------- |
 | XSMALL  |
