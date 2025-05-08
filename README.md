@@ -30,15 +30,6 @@ INITIALLY_SUSPENDED = FALSE
 COMMENT = 'This is the comment for the warehouse';
 ```
 
-| Available size |
-| -------- |
-| XSMALL  |
-| SMALL |
-| MEDIUM    |
-| LARGE    |
-| XLARGE    |
-| .....    |
-
 Stage Creation 
 ```sql
 CREATE OR REPLACE STAGE <database_name>.<schema_name>.<stage_nam>
@@ -57,6 +48,41 @@ Listing all files in a stage
 ```sql
 LIST @<database_name>.<schema_name>.<stage_name>;
 ```
+
+Creating Integration with AWS S3
+```sql
+create or replace storage integration s3_integr
+  TYPE = EXTERNAL_STAGE
+  STORAGE_PROVIDER = S3
+  ENABLED = TRUE 
+  STORAGE_AWS_ROLE_ARN = ''
+  STORAGE_ALLOWED_LOCATIONS = ('s3://<your-bucket-name>/<your-path>/')
+   COMMENT = 'Snowflake Interation' ;
+```
+
+Showing integration description
+```sql
+DESC integration s3_integr;
+```
+
+Creating File Format
+```sql
+CREATE OR REPLACE file format <database_name>.<file_format_schema>.<file_format_name>
+    type = csv
+    field_delimiter = ','
+    skip_header = 1
+    null_if = ('NULL','null')
+    empty_field_as_null = TRUE
+    FIELD_OPTIONALLY_ENCLOSED_BY = '"';
+```
+
+Copying from Stage with set file format
+
+```sql
+COPY INTO <database_name>.<schema>.<table_name>
+    FROM @<database_name>.<stage_schema_name>.<stage_name>;
+```
+
 
 
 
