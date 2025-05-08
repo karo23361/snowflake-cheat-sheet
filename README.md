@@ -23,11 +23,11 @@ CREATE OR REPLACE TABLE <database_name>.<schema_name>.<table_name> (
 Warehouse creation:
 ```sql
 CREATE OR REPLACE WAREHOUSE <name>
-WITH WAREHOUSE_SIZE = <size>
-AUTO_SUSPEND = 311
-AUTO_RESUME = TRUE
-INITIALLY_SUSPENDED = FALSE
-COMMENT = 'This is the comment for the warehouse';
+  WITH WAREHOUSE_SIZE = <size>
+  AUTO_SUSPEND = 311
+  AUTO_RESUME = TRUE
+  INITIALLY_SUSPENDED = FALSE
+  COMMENT = 'This is the comment for the warehouse';
 ```
 
 Stage Creation 
@@ -51,7 +51,7 @@ LIST @<database_name>.<schema_name>.<stage_name>;
 
 Creating Integration with AWS S3
 ```sql
-create or replace storage integration s3_integr
+CREATE OR REPLACE STORAGE INTEGRATION s3_integr
   TYPE = EXTERNAL_STAGE
   STORAGE_PROVIDER = S3
   ENABLED = TRUE 
